@@ -1,0 +1,23 @@
+.container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.forgot-password{
+    width: 100%;
+    text-align: center;
+
+    .link{
+        text-decoration: underline;
+        font-weight: 600;
+        font-size: 14px;
+    }
+}
+
+
+.submit-btn{
+    height: 50px;
+    margin-top: 40px;
+}
