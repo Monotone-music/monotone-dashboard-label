@@ -1,0 +1,11 @@
+.container{
+    display: grid;
+    grid-template-areas:
+    "sidenav main";
+  grid-template-columns: auto 1fr;
+}
+
+.main{
+    grid-area: main;
+    border: black solid 1px;
+}

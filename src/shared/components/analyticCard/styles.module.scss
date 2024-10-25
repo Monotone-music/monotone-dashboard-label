@@ -1,0 +1,56 @@
+.container{
+    border: #CACACA solid 2px;
+    border-radius: 10px;
+    height: auto;
+    width: 20%;
+    flex-direction: column;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    row-gap: 24px;
+}
+
+.left{
+    width: 40%;
+    justify-content: space-between;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.top{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.title{
+    font-size: 18px;
+    font-weight: 600;
+    color: gray;
+}
+
+.date, .unit{
+    font-size: 14px;
+    font-weight: 600;
+    color: gray;
+}
+
+.bottom{
+    display: flex;
+    align-items: center;
+    column-gap: 24px;
+}
+
+.main-number{
+    font-size: 32px;
+    font-weight: 600;
+    color: black;
+}
+
+.icon{
+    font-size: 24px;
+}
+
+
