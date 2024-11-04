@@ -1,11 +1,29 @@
-.container{
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (min-width: 767px) {
     display: grid;
     grid-template-areas:
-    "sidenav main";
-  grid-template-columns: auto 1fr;
+      "sidenav main";
+    grid-template-columns: auto 1fr;
+  }
 }
 
+
+
 .main{
+  margin-top: 70px;
+  @media screen and (min-width: 767px) {
     grid-area: main;
-    border: black solid 1px;
+    overflow: auto;
+    margin-left: 160px;
+    margin-top: 0;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin-left: 200px;
+  }
+   
 }

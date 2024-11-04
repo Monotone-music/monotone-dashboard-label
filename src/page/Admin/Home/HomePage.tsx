@@ -3,7 +3,7 @@ import TitlePage from "@/shared/components/titlePage/TitlePage";
 import AnalyticCard from "@/shared/components/analyticCard/AnalyticCard";
 import { IoMusicalNote } from "react-icons/io5";
 import { IoTrendingUpOutline } from "react-icons/io5";
-import { AiOutlineCheckCircle, AiOutlineFire } from "react-icons/ai";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa6";
 import { OverviewChart } from "@/shared/components/overviewChart/OverviewChart";
 import OverviewRankSong from "@/shared/components/overviewRankSong/OverviewRankSong";
@@ -27,13 +27,7 @@ const HomePage = () => {
           mainNumber={11}
           unit="# Rank"
         />
-        <AnalyticCard
-          iconColor="red"
-          icon={AiOutlineFire}
-          title="Most Popular Song"
-          mainNumber={"100K"}
-          unit="Plays"
-        />
+
         <AnalyticCard
           iconColor="#FFC107"
           icon={FaRegUser}

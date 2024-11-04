@@ -1,0 +1,44 @@
+.container{
+    width: 100%;
+    border: black solid 1px;
+    border-radius: 10px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    transition: all 0.3s ease;
+    max-width: 270px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: black;
+        color: white;
+
+        .bottom{
+            color: white;
+        }
+    }
+
+
+    @media screen and (min-width: 1024px) {
+        max-width: 340px;
+        height: 170px;
+    }
+
+    
+    @media screen and (min-width: 1280px) {
+        width: 100%;
+        max-width: none;
+        height: 170px;
+    }
+   
+}
+
+.bottom{
+    width: 100%;
+    padding: 0px 16px 8px;
+    display: flex;
+    justify-content: flex-end;
+    transition: all 0.3s ease;
+}

@@ -1,0 +1,23 @@
+.container{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+}
+
+.title{
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.icon{
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}

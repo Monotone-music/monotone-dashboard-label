@@ -14,7 +14,7 @@ const OverviewRankSong = () => {
     <div className={styles["outer-container"]}>
       <div className={styles.container}>
         <Table>
-          <TableHeader className="h-16 font-bold bg-slate-100 rounded-[16px]">
+          <TableHeader className="h-16 font-bold bg-slate-100">
             <TableRow>
               <TableHead className="text-black w-[200px] font-bold">Song Title</TableHead>
               <TableHead className="font-bold text-black">Album</TableHead>
