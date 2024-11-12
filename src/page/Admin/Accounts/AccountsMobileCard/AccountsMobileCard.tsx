@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './styles.module.scss'
 
 interface AccountsMobileCard {
-    firstName?: string;
-    lastName?: string;
+    displayName?: string;
+    username? :string
     img?: string;
 }
 
-const AccountsMobileCard:React.FC<AccountsMobileCard> = ({firstName, lastName, img}) => {
+const AccountsMobileCard:React.FC<AccountsMobileCard> = ({displayName, username, img}) => {
   return (
     <div className={styles.container}>
         <div className={styles['img-wrapper']}>
@@ -15,8 +15,8 @@ const AccountsMobileCard:React.FC<AccountsMobileCard> = ({firstName, lastName, i
         </div>
 
         <div className={styles['info-wrapper']}>
-            <div className={styles['last-name']}>{lastName}</div>
-            <div className={styles['first-name']}>{firstName}</div>
+            <div className={styles['last-name']}>{username}</div>
+            <div className={styles['first-name']}>{displayName}</div>
        
         </div>
     </div>

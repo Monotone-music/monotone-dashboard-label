@@ -1,6 +1,6 @@
 import { LoginData } from "@/interface/Login";
 import { useMutation } from "@tanstack/react-query";
-import { signIn } from "../authSerivce";
+import { signIn } from "../authService";
 import { AxiosError, AxiosResponse } from "axios";
 import triggerToast from "@/shared/auth/toast/AuthToast";
 import useAuthStore from "@/store/useAuthStore";

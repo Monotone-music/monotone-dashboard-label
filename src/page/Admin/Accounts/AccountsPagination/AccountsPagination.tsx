@@ -9,31 +9,25 @@ import {
 } from "@/components/ui/pagination";
 
 interface PaginationComponentProps {
-  startIndex: number;
-  endIndex: number;
-  rowPerPage: number;
-  totalItems: number;
-  handlePagination: (newStartIndex: number, newEndIndex: number) => void;
+  currentPage: number;
+  totalPages: number
+  handlePagination: (newPage: number) => void;
 }
 
 const AccountsPagination: React.FC<PaginationComponentProps> = ({
-  startIndex,
-  endIndex,
-  rowPerPage,
-  totalItems,
+  currentPage,  
+  totalPages,
   handlePagination,
 }) => {
-  const totalPages = Math.ceil(totalItems / rowPerPage);
-  const currentPage = Math.floor(startIndex / rowPerPage) + 1;
+
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            className={startIndex === 0 ? `${styles.disabled} pointer-events-none opacity-50` : undefined}
-            onClick={() =>
-              handlePagination(startIndex - rowPerPage, endIndex - rowPerPage)
+            className={currentPage === 1 ? `${styles.disabled} pointer-events-none opacity-50` : 'cursor-pointer'}
+            onClick={() => handlePagination(currentPage - 1)
             }
           />
         </PaginationItem>
@@ -44,9 +38,8 @@ const AccountsPagination: React.FC<PaginationComponentProps> = ({
         </PaginationItem>
         <PaginationItem>
           <PaginationNext
-            className={endIndex >= totalItems ? `${styles.disabled} pointer-events-none opacity-50` : undefined}
-            onClick={() =>
-              handlePagination(startIndex + rowPerPage, endIndex + rowPerPage)
+            className={currentPage >= totalPages ? `${styles.disabled} pointer-events-none opacity-50` : 'cursor-pointer'}
+            onClick={() => handlePagination(currentPage + 1)
             }
           />
         </PaginationItem>

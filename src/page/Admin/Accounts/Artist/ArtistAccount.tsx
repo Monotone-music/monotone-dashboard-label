@@ -1,36 +1,43 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./styles.module.scss";
 import AccountsBreadcrumb from "../AccountsBreadcrumb/AccountsBreadcrumb";
-import AccountsMobileCard from "../AccountsMobileCard/AccountsMobileCard";
-import dataArtist from "../../../../data/mockArtistData";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import AccountsPagination from "../AccountsPagination/AccountsPagination";
+import { useQuery } from "@tanstack/react-query";
+import useAuthStore from "@/store/useAuthStore";
+import { getAllArtists } from "@/service/adminService";
+import AccountsMobileCard from "../AccountsMobileCard/AccountsMobileCard";
+import { User } from "@/interface/User";
+import PuffLoader from "react-spinners/PuffLoader";
+import AccountsSearch from "../AccountsSearch/AccountsSearch";
+import useMediaQuery from "@/util/useMediaQuery";
+import AccountsTable from "../AccountsTable/AccountsTable";
 
 const ArtistAccount = () => {
   const rowPerPage = 5;
-  const [data, setData] = useState(dataArtist);
-  const [startIndex, setStartIndex] = useState(0);
-  const [endIndex, setEndIndex] = useState(rowPerPage);
-  const [loading, setLoading] = useState(false);
-  const totalPages = Math.ceil(data.length / rowPerPage);
-  const currentPage = Math.floor(startIndex / rowPerPage) + 1;
+  const { token } = useAuthStore();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const isMobile = useMediaQuery(`(max-width: 767px)`);
 
-  const handlePagination = (newStartIndex: number, newEndIndex: number) => {
-    setLoading(true);
-    setTimeout(() => {
-      setStartIndex(newStartIndex);
-      setEndIndex(newEndIndex);
-      setLoading(false);
-    }, 500); // Simulate loading delay
+  const { data, isFetching, error, isError } = useQuery({
+    queryKey: ["artists", token, currentPage, searchQuery],
+    queryFn: () =>
+      getAllArtists(token, "artist", currentPage, rowPerPage, searchQuery),
+  });
+
+  const { accounts, total, totalPages } = data || {};
+
+  const handlePagination = (newPage: number) => {
+    setCurrentPage(newPage);
   };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query); // Reset to the first page on a new search
+  };
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   return (
     <div className={styles.container}>
@@ -39,27 +46,35 @@ const ArtistAccount = () => {
         stage1Title="Artists"
       />
 
+      <AccountsSearch onSearch={handleSearch} />
+
       <div className={styles["list-wrapper"]}>
-        {loading ? (
-          <div className={styles.loading}>Loading...</div> // Replace with your loading indicator component
-        ) : (
-          <div className={styles["list-wrapper"]}>
-            {data.slice(startIndex, endIndex).map((item, index) => (
+        {isFetching ? (
+          <div className={styles.loading}>
+            <PuffLoader color="black" />
+          </div>
+        ) : accounts && accounts.length > 0 ? (
+          accounts.map((item: User, index: number) => {
+            return isMobile ? (
               <AccountsMobileCard
                 key={index}
-                firstName={item.firstName}
-                lastName={item.lastName}
+                displayName={item.profile?.displayName}
+                username={item.profile?.displayName}
               />
-            ))}
+            ) : (
+              <AccountsTable />
+            );
+          })
+        ) : (
+          <div className={styles.noResults}>
+            No results found for "{searchQuery}"
           </div>
         )}
       </div>
 
       <AccountsPagination
-        startIndex={startIndex}
-        endIndex={endIndex}
-        rowPerPage={rowPerPage}
-        totalItems={data.length}
+        currentPage={currentPage}
+        totalPages={totalPages}
         handlePagination={handlePagination}
       />
     </div>

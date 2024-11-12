@@ -4,7 +4,6 @@ import {
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
-    BreadcrumbPage,
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb"
 
@@ -18,7 +17,7 @@ import {
 
 const AccountsBreadcrumb:React.FC<AccountsBreadcrumbProps> = ({stage1Link, stage1Title, stage2Link, stage2Title}) => {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="w-full">
   <BreadcrumbList>
     <BreadcrumbItem>
       <BreadcrumbLink href="/admin/accounts-management">Admin</BreadcrumbLink>
@@ -27,10 +26,6 @@ const AccountsBreadcrumb:React.FC<AccountsBreadcrumbProps> = ({stage1Link, stage
     <BreadcrumbItem>
       <BreadcrumbLink href={stage1Link}>{stage1Title}</BreadcrumbLink>
     </BreadcrumbItem>
-    {/* <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
-    </BreadcrumbItem> */}
   </BreadcrumbList>
 </Breadcrumb>
   )

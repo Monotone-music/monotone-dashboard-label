@@ -31,10 +31,6 @@ const AuthForm = () => {
     });
   };
  
-
-  console.log(state)
-  
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
       <AuthInput

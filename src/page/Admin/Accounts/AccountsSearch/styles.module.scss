@@ -1,0 +1,18 @@
+.searchContainer{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    column-gap: 4px;
+}
+
+.searchBar{
+    margin: 12px 0;
+    width: 70%;
+    min-width: 260px;
+    max-width: 400px;
+}
+
+.clearButton{
+    width: 30%;
+    max-width: 100px;
+}
