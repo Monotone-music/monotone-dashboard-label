@@ -1,0 +1,98 @@
+.popupOverlay {
+  position: absolute;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  width: 100%;
+  height: 100%;
+  overflow: none;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.container {
+  width: 100%;
+  // height: 300px;
+  min-height: 500px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+
+  @media screen and (min-width: 767px) {
+    padding: 24px
+  }
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.popupContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 24px;
+}
+
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.displayName {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  .name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .role {
+    font-size: 14px;
+  }
+}
+
+.info-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .label{
+    font-weight: 600;
+  }
+
+  .info{
+    color: #8c8c8c;
+  }
+}
+
+.loading {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+}

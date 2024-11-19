@@ -10,8 +10,8 @@ const AuthPage = () => {
         <img src={img} alt="" />
       </div>
       <div className={styles["content-wrapper"]}>
-        <AuthHeading/>
-        <AuthForm/>
+        <AuthHeading role="Admin" />
+        <AuthForm />
       </div>
     </div>
   );

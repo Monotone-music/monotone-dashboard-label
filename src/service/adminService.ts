@@ -15,3 +15,25 @@ export const getAllArtists = async (token: string | null, role: string, page: nu
     });
     return response.data;
   };
+
+export const getAccountsById = async (token: string | null, id: string | null) => {
+  const response = await apiClient.get(`/admin/accounts-management/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  return response.data;
+};
+
+
+export const deleteAccountsByIds = async (token: string | null, ids: string[]) => {
+  const response = await apiClient.delete(`/admin/accounts-management`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      ids,
+    },
+  });
+  return response.data;
+};

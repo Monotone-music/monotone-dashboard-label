@@ -1,14 +1,18 @@
 
 import styles from './styles.module.scss'
 
-const AuthHeading = () => {
+interface AuthHeadingProps {
+  role?: string;
+}
+
+const AuthHeading: React.FC<AuthHeadingProps>= ({role}) => {
   return (
     <div className={styles.heading}>
     <div className={styles.title}>
-      <span>Welcome to Monotone Studio,</span>
+      <span>Welcome to Monotone Studio for <span className={styles.notation}>{role}</span>,</span>
       <span>Sign In to Continue</span>
     </div>
-    <div className={styles.description}>
+    {/* <div className={styles.description}>
       <div>
         Don't have an account?
         <a href="" className={styles.link}>
@@ -16,7 +20,7 @@ const AuthHeading = () => {
         </a>
       </div>
       <span>It takes less than a minute</span>
-    </div>
+    </div> */}
   </div>
   )
 }

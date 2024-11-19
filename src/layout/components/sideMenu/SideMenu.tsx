@@ -10,7 +10,7 @@ const SideMenu = () => {
     <div className={styles.container}>
         <div className={styles.logo}>
           <span>Monotone</span>
-          <span>Studio</span>
+          <span>Studio <span className={styles.role}>admin</span></span>
         </div>
 
         <div className={styles['list-wrapper']}>

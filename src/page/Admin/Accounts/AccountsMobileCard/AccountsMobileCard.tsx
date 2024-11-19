@@ -1,15 +1,23 @@
 import React from 'react'
 import styles from './styles.module.scss'
+import useAccountStore from '@/store/useAccountStore';
 
 interface AccountsMobileCard {
     displayName?: string;
     username? :string
     img?: string;
+    id: string;
 }
 
-const AccountsMobileCard:React.FC<AccountsMobileCard> = ({displayName, username, img}) => {
+const AccountsMobileCard:React.FC<AccountsMobileCard> = ({displayName, username, img, id}) => {
+      const {setId, setShowPopup} = useAccountStore()
+    const handleRowClick = (accountId: string) => {
+      setId(accountId);
+      setShowPopup(true)
+    };
+  
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={() => handleRowClick(id)}>
         <div className={styles['img-wrapper']}>
             <img src="https://github.com/shadcn.png" alt="" />
         </div>

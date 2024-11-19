@@ -4,17 +4,17 @@ import { Button } from "@/components/ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useSignIn from "@/service/mutations/authMutations";
-import { ToastContainer } from "react-toastify";
+import { useToast } from "@/hooks/use-toast"
 import "react-toastify/dist/ReactToastify.css";
 import BeatLoader from "react-spinners/BeatLoader";
 import { LoginData, LoginSchema } from "@/interface/Login";
+import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/useAuthStore";
-import { useNavigate, useNavigation } from "react-router-dom";
 
 const AuthForm = () => {
-  const {user} = useAuthStore()
+  const {error, user} = useAuthStore()
+  const { toast } = useToast()
   const navigate = useNavigate();
-  const {state} = useNavigation()
   const signInMutation = useSignIn();
   const {
     register,
@@ -24,11 +24,27 @@ const AuthForm = () => {
 
   const onSubmit: SubmitHandler<LoginData> = (data) => {
     signInMutation.mutate(data, {
-      onSuccess: (data) => {
-        // Redirect to the user's role-specific dashboard
-        navigate(`/${data?.data?.user?.role}/overview`, {replace: true});
+      onSuccess: () => {
+        toast({
+          variant: "default",
+          duration: 3000,
+          title: "Sign in successfully",
+          description: "Have a nice day!",
+          className: styles['toast-success']
+        })
+        navigate(`/admin/overview`, {replace: true});
       },
+
+      onError: ()=> {
+        toast({
+          variant: "destructive",
+          duration: 3000,
+          title: error || "Invalid Credentials",
+          description: "Please try again your email or password"
+        })
+      }
     });
+
   };
  
   return (
@@ -62,8 +78,6 @@ const AuthForm = () => {
       >
         {signInMutation.isPending ? <BeatLoader color="#FFFFFF" /> : "Sign in"}
       </Button>
-
-      <ToastContainer/>
     </form>
   );
 };

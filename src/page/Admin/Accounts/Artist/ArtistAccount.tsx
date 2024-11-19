@@ -11,13 +11,17 @@ import PuffLoader from "react-spinners/PuffLoader";
 import AccountsSearch from "../AccountsSearch/AccountsSearch";
 import useMediaQuery from "@/util/useMediaQuery";
 import AccountsTable from "../AccountsTable/AccountsTable";
+import { Outlet, useLocation } from "react-router-dom";
 
-const ArtistAccount = () => {
+
+
+
+const ArtistFetchComponent = () => {
+  const isMobile = useMediaQuery(`(max-width: 767px)`);
   const rowPerPage = 5;
   const { token } = useAuthStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const isMobile = useMediaQuery(`(max-width: 767px)`);
 
   const { data, isFetching, error, isError } = useQuery({
     queryKey: ["artists", token, currentPage, searchQuery],
@@ -35,48 +39,72 @@ const ArtistAccount = () => {
     setSearchQuery(query); // Reset to the first page on a new search
   };
 
+
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
-
   return (
     <div className={styles.container}>
-      <AccountsBreadcrumb
-        stage1Link="/admin/accounts-management/artist"
-        stage1Title="Artists"
-      />
+    <AccountsBreadcrumb
+      stage1Link="/admin/accounts-management/artist"
+      stage1Title="Artists"
+    />
 
-      <AccountsSearch onSearch={handleSearch} />
+    <AccountsSearch onSearch={handleSearch} />
+    <div className={styles.total}>Total: {total}</div>
 
-      <div className={styles["list-wrapper"]}>
-        {isFetching ? (
-          <div className={styles.loading}>
-            <PuffLoader color="black" />
-          </div>
-        ) : accounts && accounts.length > 0 ? (
-          accounts.map((item: User, index: number) => {
-            return isMobile ? (
-              <AccountsMobileCard
-                key={index}
-                displayName={item.profile?.displayName}
-                username={item.profile?.displayName}
-              />
-            ) : (
-              <AccountsTable />
-            );
-          })
+    <div className={styles["list-wrapper"]}>
+      {isFetching ? (
+        <div className={styles.loading}>
+          <PuffLoader color="black" />
+        </div>
+      ) : accounts && accounts.length > 0 ? (
+        isMobile ? (
+          accounts.map((item: User, index: number) => (
+            <AccountsMobileCard
+              id={item._id}
+              key={index}
+              displayName={item.profile?.displayName}
+              username={item.profile?.displayName}
+            />
+          ))
         ) : (
-          <div className={styles.noResults}>
-            No results found for "{searchQuery}"
-          </div>
-        )}
-      </div>
+          <AccountsTable data={accounts} />
+        )
+      ) : (
+        <div className={styles.noResults}>
+          No results found for "{searchQuery}"
+        </div>
+      )}
+    </div>
 
+    {isMobile ? (
       <AccountsPagination
         currentPage={currentPage}
         totalPages={totalPages}
         handlePagination={handlePagination}
       />
+    ) : (
+      <AccountsPagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      handlePagination={handlePagination}
+    />
+    )}
+
+
+  </div>
+  )
+}
+
+const ArtistAccount = () => {
+  const location = useLocation();
+  const isRootPath = location.pathname === '/admin/accounts-management/artist';
+
+
+  return (
+    <div>
+       {isRootPath ? <ArtistFetchComponent /> : <Outlet />}
     </div>
   );
 };
