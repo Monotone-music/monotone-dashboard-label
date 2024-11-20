@@ -3,13 +3,13 @@ import AuthInput from "../authInput/AuthInput";
 import { Button } from "@/components/ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useSignIn from "@/service/mutations/authMutations";
 import { useToast } from "@/hooks/use-toast"
 import "react-toastify/dist/ReactToastify.css";
 import BeatLoader from "react-spinners/BeatLoader";
 import { LoginData, LoginSchema } from "@/interface/Login";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/useAuthStore";
+import useSignIn from "@/service/mutations/signInMutations";
 
 const AuthForm = () => {
   const {error, user} = useAuthStore()

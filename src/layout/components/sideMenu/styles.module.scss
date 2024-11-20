@@ -6,10 +6,16 @@
     background-color: black;
     position: fixed;
     transition: width 0.3s ease;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     @media screen and (min-width: 1024px) {
         width: 200px;
     }
+}
+
+.top, .bottom{
+    width: 100%;
 }
 
 .logo{

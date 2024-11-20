@@ -38,7 +38,7 @@ const AccountsManagement = () => {
 
         {/* {showPopup && <AccountsPopup accountId={_id} onClose={handleClosePopup}/>}
         {showPopupDelete && <AccountsPopupDelete/>} */}
-        <Toaster/>
+        {/* <Toaster/> */}
     </div>
   )
 }

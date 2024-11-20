@@ -14,7 +14,6 @@ const SideBtn:React.FC<SideBtnProps> = ({icon,iconHovered , title, to}) => {
   const [isHover, setIsHover] = useState(false);
 
   return (
-    // <NavLink to={to} className={styles.container} 
     <NavLink to={to} className={({isActive}) => (isActive ? `${styles.active}` : styles.container )} 
     onMouseEnter={() => setIsHover(true)}
     onMouseLeave={() => setIsHover(false)}

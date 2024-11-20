@@ -12,6 +12,9 @@ import AuthPage from "./page/Auth/AuthPage";
 import { Toaster } from "./components/ui/toaster";
 import RootLayout from "./layout/Root/RootLayout";
 import HomePage from "./page/Admin/Home/HomePage";
+import AccountsManagement from "./page/Admin/Accounts/AccountsManagement";
+import ArtistAccount from "./page/Admin/Accounts/Artist/ArtistAccount";
+import ProtectedRoute from "./util/ProtectedRoute";
 // import router from "./util/Router";
 
 const queryClient = new QueryClient(
@@ -26,17 +29,27 @@ const router = createBrowserRouter([
   {
     path: "/auth/sign-in",
     element: <AuthPage />,
-  },{
-    path: '/admin',
-    element: (
-      <RootLayout/>
-    ),
+  },
+  {
+    path: "/admin",
+    element: <ProtectedRoute />, // Protect all /admin routes
     children: [
-      {path: 'overview', element: <HomePage/>}
-    ]
-  }
-
+      {
+        path: "",
+        element: <RootLayout />,
+        children: [
+          { path: "overview", element: <HomePage /> },
+          {
+            path: "accounts-management",
+            element: <AccountsManagement />,
+            children: [{ path: "artist", element: <ArtistAccount /> }],
+          },
+        ],
+      },
+    ],
+  },
 ]);
+
 
   
 createRoot(document.getElementById("root")!).render(
