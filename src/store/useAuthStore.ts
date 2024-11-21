@@ -1,18 +1,20 @@
 import { AuthState } from "@/interface/AuthState";
 import { create } from "zustand";
-
-export const useAuthStore = create<AuthState>((set) => ({
-  isAuthenticated: false,
-  user: null,
-  token: null,
-  error: null,
-  login: (token, user) =>
-    set({ isAuthenticated: true, token, user, error: null }),
-  logout: () => {
-    localStorage.removeItem("authToken");
-    set({ isAuthenticated: false, token: null, user: null, error: null });
-  },
-  setError: (error) => set({ error }),
-}));
-
+import { persist } from "zustand/middleware";
+const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      token: null,
+      errorMsg: null,
+      isAuthenticated: false,
+      setUser: (user) => set({ user }),
+      setToken: (token) => set({ token }),
+      setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
+      setErrorMsg: (errorMsg) => set({errorMsg}), 
+      logout: () => set({ user: null, token: null, isAuthenticated: false })
+    }),
+    { name: "authStorage" }  // Key for localStorage
+  )
+);
   export default useAuthStore;

@@ -7,11 +7,13 @@ interface User {
 
 // Define the AuthState type
 export interface AuthState {
-  isAuthenticated: boolean;
   user: User | null;
   token: string | null;
-  error: string | null;
-  login: (token: string, user: User) => void;
+  isAuthenticated: boolean;
+  errorMsg: string| null;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
+  setUser: (user: User) => void;
+  setToken: (token: string) => void;
+  setErrorMsg: (errorMsg: string) => void;
   logout: () => void;
-  setError: (error: string | null) => void;
 }

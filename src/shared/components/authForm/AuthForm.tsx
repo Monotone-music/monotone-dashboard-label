@@ -12,7 +12,7 @@ import useAuthStore from "@/store/useAuthStore";
 import useSignIn from "@/service/mutations/signInMutations";
 
 const AuthForm = () => {
-  const {error, user} = useAuthStore()
+  const {errorMsg} = useAuthStore()
   const { toast } = useToast()
   const navigate = useNavigate();
   const signInMutation = useSignIn();
@@ -39,7 +39,7 @@ const AuthForm = () => {
         toast({
           variant: "destructive",
           duration: 3000,
-          title: error || "Invalid Credentials",
+          title: errorMsg || "Invalid Credentials",
           description: "Please try again your email or password"
         })
       }
