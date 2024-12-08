@@ -33,8 +33,8 @@ const SideMenu = () => {
           <SideBtn
             icon={FaUser}
             iconHovered={FaUser}
-            title="Profile"
-            to="/admin/profile"
+            title="Upload"
+            to="/admin/uploader"
           />
         </div>
       </div>

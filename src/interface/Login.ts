@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 // schema
 export interface LoginData {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -19,7 +19,7 @@ export interface LoginResponse {
 
 export const LoginSchema = yup
   .object({
-    email: yup.string().required(),
+    username: yup.string().required(),
     password: yup.string().required(),
   })
   .required();

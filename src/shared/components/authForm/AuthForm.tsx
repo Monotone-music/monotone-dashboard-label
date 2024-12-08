@@ -40,7 +40,7 @@ const AuthForm = () => {
           variant: "destructive",
           duration: 3000,
           title: errorMsg || "Invalid Credentials",
-          description: "Please try again your email or password"
+          description: "Please try again your username or password"
         })
       }
     });
@@ -50,12 +50,12 @@ const AuthForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
       <AuthInput
-        label="Email"
-        id="email"
-        type="email"
-        placeholder="Enter your email"
+        label="Username"
+        id="username"
+        type="username"
+        placeholder="Enter your username"
         register={register}
-        error={errors.email?.message}
+        error={errors.username?.message}
       />
 
       <AuthInput
