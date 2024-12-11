@@ -42,7 +42,7 @@ const ArtistFetchComponent = () => {
   return (
     <div className={styles.container}>
       <AccountsBreadcrumb
-        stage1Link="/admin/accounts-management/artist"
+        stage1Link="/label/accounts-management/artist"
         stage1Title="Artists"
       />
 
@@ -93,7 +93,7 @@ const ArtistFetchComponent = () => {
 
 const ArtistAccount = () => {
   const location = useLocation();
-  const isRootPath = location.pathname === "/admin/accounts-management/artist";
+  const isRootPath = location.pathname === "/label/accounts-management/artist";
 
   return <div>{isRootPath ? <ArtistFetchComponent /> : <Outlet />}</div>;
 };

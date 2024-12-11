@@ -13,7 +13,7 @@ const SideMenu = () => {
         <div className={styles.logo}>
           <span>Monotone</span>
           <span>
-            Studio <span className={styles.role}>admin</span>
+            Studio <span className={styles.role}>label</span>
           </span>
         </div>
 
@@ -22,19 +22,19 @@ const SideMenu = () => {
             icon={RiDashboardHorizontalFill}
             iconHovered={RiDashboardHorizontalFill}
             title="Overview"
-            to="/admin/overview"
+            to="/label/overview"
           />
-          <SideBtn
+          {/* <SideBtn
             icon={HiUsers}
             iconHovered={HiUsers}
             title="Accounts"
-            to="/admin/accounts-management"
-          />
+            to="/label/accounts-management"
+          /> */}
           <SideBtn
             icon={FaUser}
             iconHovered={FaUser}
             title="Upload"
-            to="/admin/uploader"
+            to="/label/uploader"
           />
         </div>
       </div>
