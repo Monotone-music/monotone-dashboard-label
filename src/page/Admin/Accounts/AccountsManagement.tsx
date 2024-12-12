@@ -12,17 +12,17 @@ import { Toaster } from "@/components/ui/toaster"
 const AccountListView = () => {
   return (
     <div className={styles['card-wrapper']}>
-      <RedirectCard title={['Artist']} to='/admin/accounts-management/artist'/>
-      <RedirectCard title={['Music Label']} to='/admin/accounts-management/music-label'/>
-      <RedirectCard title={['Distributor']} to='/admin/accounts-management/distributor'/>
-      <RedirectCard title={['Advertiser']} to='/admin/accounts-management/advertiser'/>
+      <RedirectCard title={['Artist']} to='/label/accounts-management/artist'/>
+      <RedirectCard title={['Music Label']} to='/label/accounts-management/music-label'/>
+      <RedirectCard title={['Distributor']} to='/label/accounts-management/distributor'/>
+      <RedirectCard title={['Advertiser']} to='/label/accounts-management/advertiser'/>
     </div>
   );
 };
 
 const AccountsManagement = () => {
   const location = useLocation();
-  const isRootPath = location.pathname === '/admin/accounts-management';
+  const isRootPath = location.pathname === '/label/accounts-management';
   const {_id, showPopup, setShowPopup,setId, showPopupDelete} = useAccountStore()
 
   const handleClosePopup = () => {

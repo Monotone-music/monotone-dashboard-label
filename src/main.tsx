@@ -31,8 +31,8 @@ const router = createBrowserRouter([
     element: <AuthPage />,
   },
   {
-    path: "/admin",
-    element: <RootLayout />, // Protect all /admin routes
+    path: "/label",
+    element: <RootLayout />, // Protect all /label routes
     children: [
       { path: "overview", element: <HomePage /> },
       {

@@ -6,9 +6,9 @@ const ArtistDetail = () => {
   return (
     <div className={styles.container}>
       <AccountsBreadcrumb
-        stage1Link="/admin/accounts-management/artist"
+        stage1Link="/label/accounts-management/artist"
         stage1Title="Artists"
-        stage2Link="/admin/accounts-management/artist/:id"
+        stage2Link="/label/accounts-management/artist/:id"
         stage2Title="1adfaf"
       />
     </div>

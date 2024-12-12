@@ -23,7 +23,7 @@ const AccountsBreadcrumb: React.FC<AccountsBreadcrumbProps> = ({
     <Breadcrumb className="w-full">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/admin/accounts-management">
+          <BreadcrumbLink href="/label/accounts-management">
             Admin
           </BreadcrumbLink>
         </BreadcrumbItem>
