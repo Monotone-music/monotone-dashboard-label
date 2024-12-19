@@ -7,7 +7,7 @@ export const signIn = async (data: LoginData) => {
 
 export const refreshTokenApi2 = async () => {
     
-    const response = await apiClient.post('/auth/refresh', {
+    const response = await apiClient.post('/auth/refresh?flag=label', {
       refreshToken: localStorage.getItem('refreshToken')
     });
     return response.data.data;
