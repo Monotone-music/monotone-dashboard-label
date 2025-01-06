@@ -16,6 +16,9 @@ import HomePage from "./page/Admin/Home/HomePage";
 import UploaderPage from "./page/Uploader/UploaderPage";
 import { setNavigate } from "./service/apiClient";
 import TrackManagerPage from "./page/TrackManager/TrackManagerPage";
+import ArtistManagerPage from "./page/ArtistManager/ArtistManagerPage";
+import AudioApprovalPage from "./page/AudioApprove/AudioApprovePage";
+import RegisterPage from "./page/Register/RegisterPage";
 // import router from "./util/Router";
 
 const queryClient = new QueryClient({
@@ -42,12 +45,18 @@ const router = createBrowserRouter([
     element: <NavigationWrapper><AuthPage /></NavigationWrapper>,
   },
   {
+    path: "/auth/sign-up",
+    element: <NavigationWrapper><RegisterPage /></NavigationWrapper>,
+  },
+  {
     path: "/label",
     element: <NavigationWrapper><RootLayout /></NavigationWrapper>,
     children: [
       { path: "overview", element: <HomePage /> },
       { path: "uploader", element: <UploaderPage/> },
       { path: "manager", element: <TrackManagerPage/> },
+      { path: "artist", element: <ArtistManagerPage/> },
+      { path: "audio-approval", element: <AudioApprovalPage/> },
 
     ],
   },
