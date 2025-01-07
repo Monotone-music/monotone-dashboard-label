@@ -102,7 +102,11 @@ const AudioApprovalPage = () => {
     return (
         <div className="container mx-auto p-6">
             <h1 className="text-2xl font-bold mb-6">Audio Approval Requests</h1>
-            
+            {audioRequests.length === 0 ? (
+                <div className="flex items-center justify-center h-64 text-gray-500 text-lg">
+                    No audio requests available at the moment
+                </div>
+            ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                     {audioRequests.map((request) => (
@@ -174,6 +178,7 @@ const AudioApprovalPage = () => {
                     </div>
                 )}
             </div>
+            )}
         </div>
     );
 };

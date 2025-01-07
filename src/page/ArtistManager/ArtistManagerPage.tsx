@@ -15,19 +15,19 @@ const ArtistManagerPage = () => {
         <div className="flex justify-between items-center mb-6">
           <div className="flex gap-4">
             <div className="text-center">
-              <p className="text-2xl font-bold text-blue-600">24</p>
+              <p className="text-2xl font-bold text-blue-600">10</p>
               <p className="text-sm text-gray-600">Total Applications</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-green-600">12</p>
+              <p className="text-2xl font-bold text-green-600">4</p>
               <p className="text-sm text-gray-600">Approved</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-yellow-600">8</p>
+              <p className="text-2xl font-bold text-yellow-600">4</p>
               <p className="text-sm text-gray-600">Pending</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-red-600">4</p>
+              <p className="text-2xl font-bold text-red-600">3</p>
               <p className="text-sm text-gray-600">Rejected</p>
             </div>
           </div>
