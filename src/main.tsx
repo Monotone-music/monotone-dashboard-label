@@ -16,6 +16,7 @@ import HomePage from "./page/Admin/Home/HomePage";
 import UploaderPage from "./page/Uploader/UploaderPage";
 import { setNavigate } from "./service/apiClient";
 import TrackManagerPage from "./page/TrackManager/TrackManagerPage";
+import Register from "./page/Register/Register";
 // import router from "./util/Router";
 
 const queryClient = new QueryClient({
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/sign-in",
     element: <NavigationWrapper><AuthPage /></NavigationWrapper>,
+  },
+  {
+    path: "/auth/sign-up",
+    element: <NavigationWrapper><Register /></NavigationWrapper>,
   },
   {
     path: "/label",

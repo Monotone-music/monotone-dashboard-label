@@ -67,8 +67,9 @@ const AuthForm = () => {
         error={errors.password?.message}
       />
       <div className={styles["forgot-password"]}>
-        <a href="/" className={styles.link}>
-          Forgot password?
+        <span> Don't have account? </span>
+        <a href="/auth/sign-up" className={styles.link}>
+          Sign up now
         </a>
       </div>
 
