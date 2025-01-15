@@ -49,7 +49,7 @@ const ArtistDetailModal = ({
         onSuccess: () => {
           toast({
             title: "Artist Approved",
-            description: `${artist.artistId.name}'s application has been approved successfully.`,
+            description: `${artist.artistId.name}'s application has been approved, the artist will be notified.`,
             className: "bg-green-500 text-white",
             duration: 3000,
           });

@@ -44,6 +44,18 @@ export const cancelPendingTrack = async (trackId: string) => {
 };
 
 //==========================Artist Manager==========================
+
+interface ArtistStatistics {
+  pending: number;
+  noticed: number;
+  approved: number;
+  rejected: number;
+}
+
+export const getArtistStatistics = async (): Promise<ArtistStatistics> => {
+  const response = await apiClient.get('/label/statistics');
+  return response.data.data;
+};
 export interface ArtistRequest {
   _id: string;
   artistId: {

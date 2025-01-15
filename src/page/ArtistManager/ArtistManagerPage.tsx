@@ -3,38 +3,45 @@ import PendingArtists from "./PendingArtistsTab";
 import ApprovedArtists from "./ApprovedArtistsTab";
 import RejectedArtists from "./RejectedArtistsTab";
 import NoticedArtists from "./NoticedArtistTab";
+import { getArtistStatistics } from "@/service/managerService";
+import { useQuery } from "@tanstack/react-query";
 
 const ArtistManagerPage = () => {
+  const { data: statistics } = useQuery({
+    queryKey: ['artistStatistics'],
+    queryFn: getArtistStatistics
+  });
+
   return (
     <div className="container mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Artist Applications</h1>
-        <p className="text-gray-600">
-          Manage and review artist applications for your label
-        </p>
+        <p className="text-gray-600">Manage and review artist applications for your label</p>
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex justify-between items-center mb-6">
           <div className="flex gap-4">
             <div className="text-center">
-              <p className="text-2xl font-bold text-blue-600">10</p>
+              <p className="text-2xl font-bold text-blue-600">
+                {statistics ? statistics.pending + statistics.noticed + statistics.approved + statistics.rejected : 0}
+              </p>
               <p className="text-sm text-gray-600">Total Applications</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-green-600">4</p>
+              <p className="text-2xl font-bold text-green-600">{statistics?.approved || 0}</p>
               <p className="text-sm text-gray-600">Approved</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-yellow-600">4</p>
+              <p className="text-2xl font-bold text-yellow-600">{statistics?.pending || 0}</p>
               <p className="text-sm text-gray-600">Pending</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-red-600">3</p>
+              <p className="text-2xl font-bold text-red-600">{statistics?.rejected || 0}</p>
               <p className="text-sm text-gray-600">Rejected</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl font-bold text-blue-600">5</p>
+              <p className="text-2xl font-bold text-blue-600">{statistics?.noticed || 0}</p>
               <p className="text-sm text-gray-600">Noticed</p>
             </div>
           </div>
