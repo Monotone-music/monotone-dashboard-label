@@ -44,15 +44,42 @@ export const cancelPendingTrack = async (trackId: string) => {
 };
 
 //==========================Artist Manager==========================
-export interface Artist {
+export interface ArtistRequest {
   _id: string;
-  name: string;
-  email: string;
+  artistId: {
+    _id: string;
+    name: string;
+    account: string;
+    labelId: string;
+    releaseGroup: any[];
+    featuredIn: any[];
+    createdAt: string;
+    updatedAt: string;
+  };
+  labelId: string;
+  artistEmail: string;
+  file: string;
   status: string;
   createdAt: string;
+  updatedAt: string;
 }
 
-export const getAppliedArtists = async (): Promise<Artist[]> => {
-  const response = await apiClient.get('/label/applied-artists');
+export const getPendingArtistRequests = async (): Promise<ArtistRequest[]> => {
+  const response = await apiClient.get('/label/requests/pending');
   return response.data.data;
+};
+
+export const getApprovedArtistRequests = async (): Promise<ArtistRequest[]> => {
+  const response = await apiClient.get('/label/requests/approved');
+  return response.data.data;
+};
+
+export const getRejectedArtistRequests = async (): Promise<ArtistRequest[]> => {
+  const response = await apiClient.get('/label/requests/rejected');
+  return response.data.data;
+};
+
+export const updateArtistRequestStatus = async (requestId: string, status: 'approved' | 'rejected') => {
+  const response = await apiClient.patch(`/label/artist-requests/${requestId}`, { status });
+  return response.data;
 };

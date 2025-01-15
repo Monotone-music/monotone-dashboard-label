@@ -5,12 +5,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AppliedArtist } from "@/data/mockAppliedArtistData";
+import {
+  ArtistRequest,
+  updateArtistRequestStatus,
+} from "@/service/managerService";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface ArtistDetailModalProps {
-  artist: AppliedArtist | null;
+  artist: ArtistRequest | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -20,34 +24,76 @@ const ArtistDetailModal = ({
   isOpen,
   onClose,
 }: ArtistDetailModalProps) => {
-
   const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const updateStatusMutation = useMutation({
+    mutationFn: ({
+      requestId,
+      status,
+    }: {
+      requestId: string;
+      status: "approved" | "rejected";
+    }) => updateArtistRequestStatus(requestId, status),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["artistRequests"] });
+    },
+  });
 
   if (!artist) return null;
 
   const handleApprove = () => {
-    // Add API call here
-    console.log("Approved artist:", artist._id);
-    toast({
-        title: "Artist Approved",
-        description: `${artist.name}'s application has been approved successfully.`,
-        className: "bg-green-500 text-white",
-        duration: 3000,
-      });
-    onClose();
+    updateStatusMutation.mutate(
+      { requestId: artist._id, status: "approved" },
+      {
+        onSuccess: () => {
+          toast({
+            title: "Artist Approved",
+            description: `${artist.artistId.name}'s application has been approved successfully.`,
+            className: "bg-green-500 text-white",
+            duration: 3000,
+          });
+          onClose();
+        },
+        onError: (error) => {
+          console.error(error);
+          toast({
+            title: "Error",
+            description: "Failed to approve artist. Please try again later.",
+            className: "bg-red-500 text-white",
+            duration: 3000,
+          });
+        },
+      }
+    );
   };
 
   const handleReject = () => {
-    // Add API call here
-    console.log("Rejected artist:", artist._id);
-    toast({
-        title: "Artist Rejected",
-        description: `${artist.name}'s application has been rejected.`,
-        className: "bg-red-500 text-white",
-        duration: 3000,
-      });
-    onClose();
+    updateStatusMutation.mutate(
+      { requestId: artist._id, status: "rejected" },
+      {
+        onSuccess: () => {
+          toast({
+            title: "Artist Rejected",
+            description: `${artist.artistId.name}'s application has been rejected.`,
+            className: "bg-red-500 text-white",
+            duration: 3000,
+          });
+          onClose();
+        },
+        onError: (error) => {
+          console.error("Error rejecting artist:", error);
+          toast({
+            title: "Error",
+            description: "Failed to reject artist. Please try again later.",
+            className: "bg-red-500 text-white",
+            duration: 3000,
+          });
+        },
+      }
+    );
   };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
@@ -58,12 +104,12 @@ const ArtistDetailModal = ({
         <div className="flex flex-col items-center gap-4 py-4">
           <Avatar className="w-24 h-24">
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>{artist.name.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{artist.artistId.name.charAt(0)}</AvatarFallback>
           </Avatar>
 
           <div className="text-center">
-            <h3 className="text-xl font-semibold">{artist.name}</h3>
-            <p className="text-gray-500">{artist.email}</p>
+            <h3 className="text-xl font-semibold">{artist.artistId.name}</h3>
+            <p className="text-gray-500">{artist.artistEmail}</p>
           </div>
 
           <div className="w-full space-y-4">
@@ -91,17 +137,34 @@ const ArtistDetailModal = ({
               <span className="font-medium">Time</span>
               <span>{new Date(artist.createdAt).toLocaleTimeString()}</span>
             </div>
+
+            {artist.file && (
+              <div className="flex justify-between border-b pb-2">
+                <span className="font-medium">Application File</span>
+                <a
+                  href={`https://api2.ibarakoi.online/label/document/${artist.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  View Document
+                </a>
+              </div>
+            )}
+
             {artist.status === "pending" && (
               <div className="flex gap-4 pt-4">
                 <Button
                   className="flex-1 bg-green-600 hover:bg-green-700"
                   onClick={handleApprove}
+                  disabled={updateStatusMutation.isPending}
                 >
                   Approve
                 </Button>
                 <Button
                   className="flex-1 bg-red-600 hover:bg-red-700"
                   onClick={handleReject}
+                  disabled={updateStatusMutation.isPending}
                 >
                   Reject
                 </Button>
@@ -113,5 +176,4 @@ const ArtistDetailModal = ({
     </Dialog>
   );
 };
-
 export default ArtistDetailModal;
