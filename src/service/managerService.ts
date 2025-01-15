@@ -79,7 +79,16 @@ export const getRejectedArtistRequests = async (): Promise<ArtistRequest[]> => {
   return response.data.data;
 };
 
+export const getNoticedArtistRequests = async (): Promise<ArtistRequest[]> => {
+  const response = await apiClient.get('/label/requests/noticed');
+  return response.data.data;
+};
+
 export const updateArtistRequestStatus = async (requestId: string, status: 'approved' | 'rejected') => {
-  const response = await apiClient.patch(`/label/artist-requests/${requestId}`, { status });
-  return response.data;
+  const endpoint = status === 'approved' 
+  ? `/label/approve/${requestId}`
+  : `/label/reject/${requestId}`;
+  
+const response = await apiClient.post(endpoint);
+return response.data;
 };
