@@ -16,6 +16,8 @@ import HomePage from "./page/Admin/Home/HomePage";
 import UploaderPage from "./page/Uploader/UploaderPage";
 import { setNavigate } from "./service/apiClient";
 import TrackManagerPage from "./page/TrackManager/TrackManagerPage";
+import ArtistManagerPage from "./page/ArtistManager/ArtistManagerPage";
+import AudioApprovalPage from "./page/AudioApprove/AudioApprovePage";
 import Register from "./page/Register/Register";
 // import router from "./util/Router";
 
@@ -53,6 +55,8 @@ const router = createBrowserRouter([
       { path: "overview", element: <HomePage /> },
       { path: "uploader", element: <UploaderPage/> },
       { path: "manager", element: <TrackManagerPage/> },
+      { path: "artist", element: <ArtistManagerPage/> },
+      { path: "audio-approval", element: <AudioApprovalPage/> },
 
     ],
   },

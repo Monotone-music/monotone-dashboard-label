@@ -1,32 +1,52 @@
 .container {
   width: 100%;
-  height: auto;
   display: flex;
   flex-direction: column;
-}
+  row-gap: 16px;
+  padding: 16px;
+  overflow-y: scroll;
+  
+  /* Custom scrollbar styling */
+  &::-webkit-scrollbar {
+      width: 8px;
+  }
 
-.forgot-password {
-  width: 100%;
-  text-align: center;
+  &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+  }
 
-  .link {
-    text-decoration: underline;
-    font-weight: 600;
-    font-size: 14px;
+  &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+      
+      &:hover {
+          background: #555;
+      }
   }
 }
 
 .submit-btn {
   height: 50px;
-  margin-top: 40px;
+  margin-top: 8px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.link {
+ 
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 14px;
+  &:hover {
+      text-decoration: underline;
+  }
 }
 
 .toast-success {
-  background-color: #43a047;
-  color: white;
-}
-
-.toast-failed {
-  background-color: #e53935;
+  background-color: #22c55e;
   color: white;
 }
