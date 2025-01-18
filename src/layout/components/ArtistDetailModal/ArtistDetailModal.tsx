@@ -7,11 +7,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   ArtistRequest,
+  getArtistImgByFilename,
   updateArtistRequestStatus,
 } from "@/service/managerService";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface ArtistDetailModalProps {
   artist: ArtistRequest | null;
@@ -26,7 +27,12 @@ const ArtistDetailModal = ({
 }: ArtistDetailModalProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-
+  
+  const {data: profileImg} = useQuery({
+    queryKey: ['profileImgArtist', artist],
+    queryFn: () => getArtistImgByFilename(artist?.artistId.image.filename)
+  })
+console.log(artist)
   const updateStatusMutation = useMutation({
     mutationFn: ({
       requestId,
@@ -103,7 +109,7 @@ const ArtistDetailModal = ({
 
         <div className="flex flex-col items-center gap-4 py-4">
           <Avatar className="w-24 h-24">
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src={profileImg||"https://github.com/shadcn.png"} />
             <AvatarFallback>{artist.artistId.name.charAt(0)}</AvatarFallback>
           </Avatar>
 

@@ -52,6 +52,17 @@ interface ArtistStatistics {
   rejected: number;
 }
 
+export const getArtistImgByFilename = async (filename: string) => {
+  const response = await apiClient.get(`/image/${filename}`, {
+    responseType: 'blob',
+  });
+  
+  const blob = response.data;
+  const url = URL.createObjectURL(blob);
+  return url;
+
+}
+
 export const getArtistStatistics = async (): Promise<ArtistStatistics> => {
   const response = await apiClient.get('/label/statistics');
   return response.data.data;
@@ -67,6 +78,7 @@ export interface ArtistRequest {
     featuredIn: any[];
     createdAt: string;
     updatedAt: string;
+    image: any;
   };
   labelId: string;
   artistEmail: string;

@@ -27,7 +27,7 @@ export const approveAudio = async (trackId: string) => {
     return response.data;
 };
 
-export const rejectAudio = async (trackId: string) => {
-    const response = await apiClient.patch(`/recording/reject/${trackId}`);
+export const rejectAudio = async (trackId: string, reason: string) => {
+    const response = await apiClient.patch(`/recording/reject/${trackId}`, {reason});
     return response.data;
 };
